@@ -94,11 +94,11 @@
 </head>
 <body>
 <div class="menu-wrap">
-
+ 
   <div class="header-card">
     <div class="header-top">
       <div>
-        <div class="dealership-name" contenteditable="true">Jenkins Genesis of Ocala</div>
+        <div class="dealership-name" contenteditable="true">Your Dealership Name</div>
         <div style="font-size:12px;color:#888780;margin-top:3px;">Accessories Protection Menu</div>
       </div>
       <div class="tag">Accessory Menu</div>
@@ -110,10 +110,10 @@
       <div class="field-group"><div class="field-label">Date</div><input type="date" id="f-date"></div>
     </div>
   </div>
-
+ 
   <div class="section-label">Select protection packages</div>
   <div class="products-grid" id="products-grid"></div>
-
+ 
   <div class="totals-card">
     <div class="section-label" style="margin-bottom:10px;">Deal summary</div>
     <div class="cash-toggle-row no-print" id="cash-toggle">
@@ -151,13 +151,13 @@
     </div>
     <div style="margin-bottom:14px;">
       <div class="tax-row"><span>Subtotal</span><span id="subtotal-line">$0.00</span></div>
-      <div class="tax-row"><span>Sales tax (7%)</span><span id="tax-line">$0.00</span></div>
+      <div class="tax-row"><span>Sales tax (7.5%)</span><span id="tax-line">$0.00</span></div>
       <div class="tax-total-row"><span>Total with tax</span><span id="total-with-tax">$0.00</span></div>
     </div>
     <div class="section-label">Selected items</div>
     <div class="selected-list" id="selected-list">No items selected</div>
   </div>
-
+ 
   <div class="sig-card">
     <div class="section-label">Customer acknowledgment</div>
     <p class="ack-text">I have been offered the above accessory protection products by the dealership. The items checked above have been selected and agreed to at the prices listed. I understand these are optional products and my decision is reflected below.</p>
@@ -179,43 +179,43 @@
         <button class="sig-clear-btn" onclick="clearSig('sig-associate','ph-associate')">Clear</button>
       </div>
     </div>
-    <div class="disclaimer">All prices shown are pre-tax. A 7% sales tax is applied and reflected in the total. Monthly payment figures are estimates based on the finance term and rate shown above and are for reference only. Final payment amounts will be reflected in your financing contract. Products and prices subject to change.</div>
+    <div class="disclaimer">All prices shown are pre-tax. A 7.5% sales tax is applied and reflected in the total. Monthly payment figures are estimates based on the finance term and rate shown above and are for reference only. Final payment amounts will be reflected in your financing contract. Products and prices subject to change.</div>
   </div>
-
+ 
   <div class="btn-row no-print">
     <button class="btn" onclick="clearAll()">Clear all</button>
     <button class="btn primary" onclick="window.print()">Print menu</button>
   </div>
-
+ 
 </div>
 <script>
-const TAX = 0.07;
+const TAX = 0.075;
 const products = [
   { id:'ceramic',   name:'Ceramic Coat',           desc:'Professional-grade ceramic coating bonds to paint for deep gloss, hydrophobic protection, and UV defense. Keeps the car looking new longer.',                                                                                              price:2995 },
   { id:'tint',      name:'Window Tint',             desc:'Professional automotive tint that blocks heat, UV rays, and glare. Adds privacy, protects the interior, and enhances the vehicle\'s appearance.',                                                                                        price:799  },
-  { id:'mudguards', name:'Mudguards',               desc:'Precision-fit mudguards protect your vehicle\'s paint and body from road spray, mud, rocks, and debris. Keeps your vehicle looking clean without sacrificing factory appearance.',                                                       price:799  },
-  { id:'floating-wheelcaps', name:'Floating Wheel Caps',              desc:'Enhance the presence of your Genesis with Floating Wheel Caps, designed to keep the iconic wing emblem positioned upright and level even while the vehicle is in motion. This sophisticated detail ensures a constant, composed look that perfectly complements the luxury aesthetic of your vehicle.',                                                                                                     price:445  },
-  { id:'mats',      name:'All Weather Mats',        desc:'Custom-fit heavy-duty floor liners that trap dirt, mud, and moisture. Protect the factory carpet from wear and staining year-round.',                                                                                                   price:699  },
-  { id:'wheellocks',name:'Wheel Locks',             desc:'Anti-theft lug nut locks that require a unique key socket to remove — making it nearly impossible for thieves to steal your wheels.',                                                                                                   price:469  },
-  { id:'roadside',  name:'Roadside Assistance Kit', desc:'Comprehensive emergency roadside kit including jumper cables, LED flares, tire sealant, and essential tools. Pre-loaded in your vehicle for peace of mind.',                                                                            price:499  },
-  { id:'cargotray', name:'Cargo Tray',              desc:'Durable, custom-fit cargo tray that protects your trunk or cargo area from spills, dirt, and damage. Raised edges contain messes and wipe clean in seconds.',                                                                          price:499  },
-  { id:'doorsills', name:'Illuminated Door Sills',  desc:'LED-lit stainless steel door sill guards that light up when the door opens. Adds a premium look while protecting sills from scuffs and scratches.',                                                                                    price:1099  },
-  { id:'brake',     name:'Brake Pulse',             desc:'A safety-first collision avoidance system designed to protect you and your vehicle from rear-end accidents. When you apply your brakes, the system pulses your center high-mount stop light 3 times before turning solid.',             price:529  },
-  { id:'firstaid',  name:'First Aid Kit',           desc:'Fully stocked vehicle first aid kit ready for emergencies on the road. Includes bandages, antiseptic wipes, gauze, medical tape, and more — stored in a compact, vehicle-ready case.',                                                 price:299  },
-  { id:'cargоnet',  name:'Cargo Net',               desc:'Flexible cargo net that keeps items secure in your trunk or cargo area during transport. Prevents groceries, bags, and gear from sliding around.',                                                                                     price:299    },
-  { id:'hitch',     name:'Hitch',                   desc:'Professionally installed trailer hitch receiver that enables towing, bike racks, and cargo carriers. Rated for your specific vehicle\'s tow capacity.',                                                                                price:2999 },
-  { id:'sidesteps', name:'Side Steps',              desc:'Custom-fit running boards that make entry and exit easier while adding a rugged, finished look to your vehicle. Built to handle daily use in any weather.',                                                                             price:2499 },
+  { id:'mudguards', name:'Mudguards',               desc:'Precision-fit mudguards protect your vehicle\'s paint and body from road spray, mud, rocks, and debris. Keeps your vehicle looking clean without sacrificing factory appearance.',                                                       price:360  },
+  { id:'wheelcaps', name:'Wheel Caps',              desc:'Custom-fit decorative wheel caps that enhance the look of your wheels while protecting the hub from dirt, moisture, and corrosion.',                                                                                                     price:445  },
+  { id:'mats',      name:'All Weather Mats',        desc:'Custom-fit heavy-duty floor liners that trap dirt, mud, and moisture. Protect the factory carpet from wear and staining year-round.',                                                                                                   price:410  },
+  { id:'wheellocks',name:'Wheel Locks',             desc:'Anti-theft lug nut locks that require a unique key socket to remove — making it nearly impossible for thieves to steal your wheels.',                                                                                                   price:250  },
+  { id:'roadside',  name:'Roadside Assistance Kit', desc:'Comprehensive emergency roadside kit including jumper cables, LED flares, tire sealant, and essential tools. Pre-loaded in your vehicle for peace of mind.',                                                                            price:170  },
+  { id:'cargotray', name:'Cargo Tray',              desc:'Durable, custom-fit cargo tray that protects your trunk or cargo area from spills, dirt, and damage. Raised edges contain messes and wipe clean in seconds.',                                                                          price:190  },
+  { id:'doorsills', name:'Illuminated Door Sills',  desc:'LED-lit stainless steel door sill guards that light up when the door opens. Adds a premium look while protecting sills from scuffs and scratches.',                                                                                    price:660  },
+  { id:'brake',     name:'Brake Pulse',             desc:'A safety-first collision avoidance system designed to protect you and your vehicle from rear-end accidents. When you apply your brakes, the system pulses your center high-mount stop light 3 times before turning solid.',             price:275  },
+  { id:'firstaid',  name:'First Aid Kit',           desc:'Fully stocked vehicle first aid kit ready for emergencies on the road. Includes bandages, antiseptic wipes, gauze, medical tape, and more — stored in a compact, vehicle-ready case.',                                                 price:170  },
+  { id:'cargоnet',  name:'Cargo Net',               desc:'Flexible cargo net that keeps items secure in your trunk or cargo area during transport. Prevents groceries, bags, and gear from sliding around.',                                                                                     price:0    },
+  { id:'hitch',     name:'Hitch',                   desc:'Professionally installed trailer hitch receiver that enables towing, bike racks, and cargo carriers. Rated for your specific vehicle\'s tow capacity.',                                                                                price:1500 },
+  { id:'sidesteps', name:'Side Steps',              desc:'Custom-fit running boards that make entry and exit easier while adding a rugged, finished look to your vehicle. Built to handle daily use in any weather.',                                                                             price:1500 },
 ];
 const selected = new Set();
 let isCash = false;
-
+ 
 function fmt(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
 function calcMonthly(total, months, rate) {
   if (!rate) return total / months;
   const r = rate / 100 / 12;
   return total * r / (1 - Math.pow(1+r,-months));
 }
-
+ 
 function updateTotals() {
   const term = parseInt(document.getElementById('term-select').value);
   const rate = parseFloat(document.getElementById('rate-input').value) || 0;
@@ -243,7 +243,7 @@ function updateTotals() {
   if (isCash) { mc.style.opacity='0.35'; document.getElementById('monthly-bump').textContent='N/A'; }
   else { mc.style.opacity='1'; document.getElementById('monthly-bump').textContent = selected.size > 0 ? '+'+fmt(monthly).replace('.00','')+'/mo' : '$0/mo'; }
 }
-
+ 
 function clearAll() {
   selected.clear();
   document.querySelectorAll('.product-row,.other-row').forEach(r => r.classList.remove('selected'));
@@ -252,31 +252,31 @@ function clearAll() {
   clearSig('sig-customer','ph-customer'); clearSig('sig-associate','ph-associate');
   updateTotals();
 }
-
+ 
 document.getElementById('cash-toggle').addEventListener('click', function() {
   isCash = !isCash; this.classList.toggle('active', isCash);
   document.getElementById('finance-controls').style.display = isCash ? 'none' : 'flex';
   document.getElementById('cash-sub').textContent = isCash ? 'Cash deal — monthly payment hidden' : 'Toggle to hide monthly payment';
   updateTotals();
 });
-
+ 
 function renderProducts() {
   const grid = document.getElementById('products-grid');
   products.forEach(p => {
     const row = document.createElement('div'); row.className = 'product-row';
-    row.innerHTML = `<div class="check-box"><div class="check-mark">&#10003;</div></div><div class="product-info"><div class="product-name">${p.name}</div><div class="product-desc">${p.desc}</div></div><div class="product-pricing"><div class="price-input-wrap"><span class="price-symbol">$</span><input class="price-input" type="number" id="price-${p.id}" value="${p.price}" min="0" step="1"></div><div class="price-note">+ 7% tax</div></div>`;
+    row.innerHTML = `<div class="check-box"><div class="check-mark">&#10003;</div></div><div class="product-info"><div class="product-name">${p.name}</div><div class="product-desc">${p.desc}</div></div><div class="product-pricing"><div class="price-input-wrap"><span class="price-symbol">$</span><input class="price-input" type="number" id="price-${p.id}" value="${p.price}" min="0" step="1"></div><div class="price-note">+ 7.5% tax</div></div>`;
     row.addEventListener('click', e => { if (e.target.classList.contains('price-input')) return; selected.has(p.id)?selected.delete(p.id):selected.add(p.id); row.classList.toggle('selected',selected.has(p.id)); updateTotals(); });
     row.querySelector('.price-input').addEventListener('input', updateTotals);
     grid.appendChild(row);
   });
   const other = document.createElement('div'); other.className = 'other-row';
-  other.innerHTML = `<div class="check-box"><div class="check-mark">&#10003;</div></div><div class="product-info"><input class="other-name-input" id="other-name-input" type="text" placeholder="Add custom product name..."><input class="other-desc-input" id="other-desc-input" type="text" placeholder="Short description (optional)"></div><div class="product-pricing"><div class="price-input-wrap"><span class="price-symbol">$</span><input class="price-input" type="number" id="price-other" value="0" min="0" step="1"></div><div class="price-note">+ 7% tax</div></div>`;
+  other.innerHTML = `<div class="check-box"><div class="check-mark">&#10003;</div></div><div class="product-info"><input class="other-name-input" id="other-name-input" type="text" placeholder="Add custom product name..."><input class="other-desc-input" id="other-desc-input" type="text" placeholder="Short description (optional)"></div><div class="product-pricing"><div class="price-input-wrap"><span class="price-symbol">$</span><input class="price-input" type="number" id="price-other" value="0" min="0" step="1"></div><div class="price-note">+ 7.5% tax</div></div>`;
   other.addEventListener('click', e => { if (['price-input','other-name-input','other-desc-input'].some(c=>e.target.classList.contains(c))) return; selected.has('other')?selected.delete('other'):selected.add('other'); other.classList.toggle('selected',selected.has('other')); updateTotals(); });
   other.querySelector('#price-other').addEventListener('input', updateTotals);
   other.querySelector('#other-name-input').addEventListener('input', updateTotals);
   grid.appendChild(other);
 }
-
+ 
 const sigState = {};
 function initSigPad(canvasId, placeholderId) {
   const canvas = document.getElementById(canvasId);
@@ -284,7 +284,7 @@ function initSigPad(canvasId, placeholderId) {
   const container = canvas.parentElement;
   let drawing = false;
   sigState[canvasId] = { hasSig: false };
-
+ 
   function resize() {
     const dpr = window.devicePixelRatio || 1;
     const w = container.clientWidth || 300;
@@ -308,7 +308,7 @@ function initSigPad(canvasId, placeholderId) {
   canvas.addEventListener('touchend', () => drawing = false);
   resize();
 }
-
+ 
 function clearSig(canvasId, placeholderId) {
   const canvas = document.getElementById(canvasId);
   const dpr = window.devicePixelRatio || 1;
@@ -316,7 +316,7 @@ function clearSig(canvasId, placeholderId) {
   document.getElementById(placeholderId).style.display = 'block';
   if (sigState[canvasId]) sigState[canvasId].hasSig = false;
 }
-
+ 
 document.getElementById('f-date').valueAsDate = new Date();
 document.getElementById('term-select').addEventListener('change', updateTotals);
 document.getElementById('rate-input').addEventListener('input', updateTotals);
