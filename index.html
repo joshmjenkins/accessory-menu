@@ -23,6 +23,7 @@
   .product-row { background: #fff; border: 0.5px solid rgba(0,0,0,0.12); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: border-color 0.15s; }
   .product-row:hover { border-color: rgba(0,0,0,0.25); }
   .product-row.selected { border: 1.5px solid #3c82e6; background: #f0f5fd; }
+  .product-row.dragging { opacity: 0.6; }
   .other-row { background: #fff; border: 0.5px dashed rgba(0,0,0,0.2); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: border-color 0.15s; }
   .other-row:hover { border-color: rgba(0,0,0,0.35); }
   .other-row.selected { border: 1.5px solid #3c82e6; background: #f0f5fd; }
@@ -43,6 +44,33 @@
   .price-input { font-size: 16px; font-weight: 500; color: #1a1a18; background: transparent; border: none; border-bottom: 0.5px solid rgba(0,0,0,0.15); text-align: right; width: 72px; padding: 2px 0; }
   .price-input:focus { outline: none; border-bottom-color: #3c82e6; }
   .price-note { font-size: 12px; color: #888780; }
+  
+  /* Bundle builder styles */
+  .bundle-builder-card { background: #fff; border: 0.5px solid rgba(0,0,0,0.12); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+  .bundle-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1rem; }
+  .bundle-column { background: #f5f5f3; border-radius: 8px; padding: 12px; min-height: 200px; border: 1.5px solid rgba(0,0,0,0.08); transition: border-color 0.2s; }
+  .bundle-column.drag-over { border-color: #3c82e6; background: #f0f5fd; }
+  .bundle-header { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
+  .bundle-tier-name { font-size: 14px; font-weight: 500; color: #1a1a18; cursor: pointer; padding: 4px 6px; border-radius: 4px; border: 0.5px solid transparent; transition: border-color 0.15s; }
+  .bundle-tier-name:hover { border-color: rgba(0,0,0,0.2); background: rgba(0,0,0,0.04); }
+  .bundle-tier-name.editing { background: #fff; border-color: #3c82e6; }
+  .bundle-tier-input { font-size: 14px; font-weight: 500; color: #1a1a18; background: transparent; border: none; border-bottom: 0.5px solid #3c82e6; padding: 3px 4px; width: 100%; }
+  .bundle-tier-input:focus { outline: none; }
+  .bundle-clear-btn { font-size: 11px; color: #888780; background: none; border: none; cursor: pointer; padding: 0; text-decoration: underline; margin-left: auto; }
+  .bundle-clear-btn:hover { color: #1a1a18; }
+  .bundle-items { display: flex; flex-direction: column; gap: 8px; min-height: 120px; }
+  .bundle-item { background: #fff; border: 0.5px solid rgba(0,0,0,0.12); border-radius: 6px; padding: 8px 10px; font-size: 13px; color: #1a1a18; cursor: move; user-select: none; transition: all 0.15s; }
+  .bundle-item:hover { border-color: rgba(0,0,0,0.25); }
+  .bundle-item.dragging { opacity: 0.4; }
+  .bundle-item-name { font-weight: 500; margin-bottom: 2px; }
+  .bundle-item-price { font-size: 12px; color: #888780; }
+  .bundle-drop-zone { flex: 1; border: 1.5px dashed rgba(0,0,0,0.1); border-radius: 6px; padding: 8px; display: flex; align-items: center; justify-content: center; color: #bbb; font-size: 12px; transition: all 0.2s; }
+  .bundle-drop-zone.drag-active { border-color: #3c82e6; background: rgba(60,130,230,0.04); color: #3c82e6; }
+  .bundle-totals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .bundle-total-card { background: #f5f5f3; border-radius: 8px; padding: 10px; text-align: center; }
+  .bundle-total-label { font-size: 11px; color: #888780; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .bundle-total-price { font-size: 18px; font-weight: 500; color: #1a1a18; }
+  
   .cash-toggle-row { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; border: 0.5px solid rgba(0,0,0,0.15); background: #f5f5f3; margin-bottom: 12px; cursor: pointer; user-select: none; }
   .cash-toggle-row.active { border: 1.5px solid #1d9e75; background: #e1f5ee; }
   .toggle-box { width: 20px; height: 20px; border-radius: 6px; border: 0.5px solid rgba(0,0,0,0.2); background: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -80,12 +108,14 @@
   .btn.primary { background: #1a1a18; color: #fff; border-color: #1a1a18; }
   .btn.primary:hover { opacity: 0.85; }
   @media (max-width: 520px) {
+    .bundle-container { grid-template-columns: 1fr; }
+    .bundle-totals { grid-template-columns: 1fr; }
     .totals-grid { grid-template-columns: 1fr 1fr; }
     .sig-row { grid-template-columns: 1fr; }
   }
   @media print {
     body { background: #fff; padding: 0.5rem; }
-    .btn-row, .no-print { display: none !important; }
+    .btn-row, .no-print, .bundle-builder-card { display: none !important; }
     .sig-clear-btn { display: none !important; }
     .product-row, .other-row { page-break-inside: avoid; }
     .sig-canvas-container { border: 0.5px solid #ccc; background: #fff; }
@@ -113,6 +143,12 @@
  
   <div class="section-label">Select protection packages</div>
   <div class="products-grid" id="products-grid"></div>
+ 
+  <div class="bundle-builder-card no-print">
+    <div class="section-label" style="margin-bottom:12px;">Build package bundles</div>
+    <div class="bundle-container" id="bundle-container"></div>
+    <div class="bundle-totals" id="bundle-totals"></div>
+  </div>
  
   <div class="totals-card">
     <div class="section-label" style="margin-bottom:10px;">Deal summary</div>
@@ -209,6 +245,24 @@ const products = [
 const selected = new Set();
 let isCash = false;
  
+// Bundle state
+const bundles = { 0: [], 1: [], 2: [] };
+const bundleNames = { 0: 'Essential', 1: 'Premium', 2: 'Deluxe' };
+ 
+// Load bundles and names from localStorage
+function loadBundles() {
+  const saved = localStorage.getItem('accessory-bundles');
+  const savedNames = localStorage.getItem('accessory-bundle-names');
+  if (saved) Object.assign(bundles, JSON.parse(saved));
+  if (savedNames) Object.assign(bundleNames, JSON.parse(savedNames));
+}
+ 
+// Save bundles to localStorage
+function saveBundles() {
+  localStorage.setItem('accessory-bundles', JSON.stringify(bundles));
+  localStorage.setItem('accessory-bundle-names', JSON.stringify(bundleNames));
+}
+ 
 function fmt(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
 function calcMonthly(total, months, rate) {
   if (!rate) return total / months;
@@ -216,19 +270,24 @@ function calcMonthly(total, months, rate) {
   return total * r / (1 - Math.pow(1+r,-months));
 }
  
+function getProductName(id) {
+  if (id === 'other') return document.getElementById('other-name-input')?.value.trim() || 'Other';
+  const p = products.find(x => x.id === id);
+  return p ? p.name : '';
+}
+ 
+function getProductPrice(id) {
+  if (id === 'other') return parseFloat(document.getElementById('price-other')?.value) || 0;
+  return parseFloat(document.getElementById('price-' + id)?.value) || 0;
+}
+ 
 function updateTotals() {
   const term = parseInt(document.getElementById('term-select').value);
   const rate = parseFloat(document.getElementById('rate-input').value) || 0;
   let subtotal = 0, names = [];
   selected.forEach(id => {
-    if (id === 'other') {
-      const val = parseFloat(document.getElementById('price-other')?.value) || 0;
-      const nm = document.getElementById('other-name-input')?.value.trim() || 'Other';
-      subtotal += val; names.push(nm);
-    } else {
-      const p = products.find(x => x.id === id);
-      if (p) { subtotal += parseFloat(document.getElementById('price-'+id)?.value) || 0; names.push(p.name); }
-    }
+    subtotal += getProductPrice(id);
+    names.push(getProductName(id));
   });
   const tax = subtotal * TAX, total = subtotal + tax;
   const monthly = (!isCash && selected.size > 0) ? calcMonthly(total, term, rate) : 0;
@@ -242,6 +301,8 @@ function updateTotals() {
   const mc = document.getElementById('monthly-card');
   if (isCash) { mc.style.opacity='0.35'; document.getElementById('monthly-bump').textContent='N/A'; }
   else { mc.style.opacity='1'; document.getElementById('monthly-bump').textContent = selected.size > 0 ? '+'+fmt(monthly).replace('.00','')+'/mo' : '$0/mo'; }
+  
+  renderBundles();
 }
  
 function clearAll() {
@@ -250,6 +311,8 @@ function clearAll() {
   const ni = document.getElementById('other-name-input'), di = document.getElementById('other-desc-input');
   if (ni) ni.value = ''; if (di) di.value = '';
   clearSig('sig-customer','ph-customer'); clearSig('sig-associate','ph-associate');
+  bundles[0] = []; bundles[1] = []; bundles[2] = [];
+  saveBundles();
   updateTotals();
 }
  
@@ -260,17 +323,194 @@ document.getElementById('cash-toggle').addEventListener('click', function() {
   updateTotals();
 });
  
+function renderBundles() {
+  const container = document.getElementById('bundle-container');
+  const totals = document.getElementById('bundle-totals');
+  container.innerHTML = '';
+  totals.innerHTML = '';
+ 
+  [0, 1, 2].forEach(bundleIdx => {
+    const col = document.createElement('div');
+    col.className = 'bundle-column';
+    col.id = 'bundle-' + bundleIdx;
+    col.ondragover = (e) => { e.preventDefault(); col.classList.add('drag-over'); };
+    col.ondragleave = () => col.classList.remove('drag-over');
+    col.ondrop = (e) => { e.preventDefault(); col.classList.remove('drag-over'); };
+ 
+    const header = document.createElement('div');
+    header.className = 'bundle-header';
+ 
+    const tierName = document.createElement('div');
+    tierName.className = 'bundle-tier-name';
+    tierName.textContent = bundleNames[bundleIdx];
+    tierName.onclick = (e) => {
+      e.stopPropagation();
+      tierName.classList.add('editing');
+      const input = document.createElement('input');
+      input.className = 'bundle-tier-input';
+      input.type = 'text';
+      input.value = bundleNames[bundleIdx];
+      tierName.replaceWith(input);
+      input.focus();
+      input.select();
+      const save = () => {
+        bundleNames[bundleIdx] = input.value || bundleNames[bundleIdx];
+        saveBundles();
+        input.replaceWith(tierName);
+        tierName.textContent = bundleNames[bundleIdx];
+        tierName.classList.remove('editing');
+      };
+      input.onblur = save;
+      input.onkeypress = (e) => { if (e.key === 'Enter') save(); };
+    };
+ 
+    const clearBtn = document.createElement('button');
+    clearBtn.className = 'bundle-clear-btn';
+    clearBtn.textContent = 'Clear';
+    clearBtn.onclick = (e) => {
+      e.stopPropagation();
+      bundles[bundleIdx] = [];
+      saveBundles();
+      updateTotals();
+    };
+ 
+    header.appendChild(tierName);
+    header.appendChild(clearBtn);
+    col.appendChild(header);
+ 
+    const items = document.createElement('div');
+    items.className = 'bundle-items';
+ 
+    bundles[bundleIdx].forEach(itemId => {
+      const item = document.createElement('div');
+      item.className = 'bundle-item';
+      item.draggable = true;
+      item.dataset.itemId = itemId;
+      item.dataset.bundleIdx = bundleIdx;
+ 
+      const name = document.createElement('div');
+      name.className = 'bundle-item-name';
+      name.textContent = getProductName(itemId);
+ 
+      const price = document.createElement('div');
+      price.className = 'bundle-item-price';
+      price.textContent = fmt(getProductPrice(itemId));
+ 
+      item.appendChild(name);
+      item.appendChild(price);
+ 
+      item.ondragstart = (e) => {
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('itemId', itemId);
+        e.dataTransfer.setData('sourceBundleIdx', bundleIdx);
+        item.classList.add('dragging');
+      };
+      item.ondragend = () => item.classList.remove('dragging');
+      item.ondblclick = (e) => {
+        e.stopPropagation();
+        bundles[bundleIdx] = bundles[bundleIdx].filter(id => id !== itemId);
+        saveBundles();
+        updateTotals();
+      };
+ 
+      items.appendChild(item);
+    });
+ 
+    if (bundles[bundleIdx].length === 0) {
+      const zone = document.createElement('div');
+      zone.className = 'bundle-drop-zone';
+      zone.textContent = 'Drag items here';
+      zone.ondragover = (e) => { e.preventDefault(); zone.classList.add('drag-active'); };
+      zone.ondragleave = () => zone.classList.remove('drag-active');
+      zone.ondrop = (e) => {
+        e.preventDefault();
+        zone.classList.remove('drag-active');
+        const itemId = e.dataTransfer.getData('itemId');
+        const srcIdx = parseInt(e.dataTransfer.getData('sourceBundleIdx'));
+        if (srcIdx !== bundleIdx) {
+          bundles[srcIdx] = bundles[srcIdx].filter(id => id !== itemId);
+        }
+        if (!bundles[bundleIdx].includes(itemId)) {
+          bundles[bundleIdx].push(itemId);
+        }
+        saveBundles();
+        updateTotals();
+      };
+      items.appendChild(zone);
+    }
+ 
+    col.appendChild(items);
+    container.appendChild(col);
+  });
+ 
+  // Render totals
+  [0, 1, 2].forEach(bundleIdx => {
+    const card = document.createElement('div');
+    card.className = 'bundle-total-card';
+ 
+    const label = document.createElement('div');
+    label.className = 'bundle-total-label';
+    label.textContent = bundleNames[bundleIdx];
+ 
+    let bundleTotal = 0;
+    bundles[bundleIdx].forEach(itemId => {
+      bundleTotal += getProductPrice(itemId);
+    });
+ 
+    const price = document.createElement('div');
+    price.className = 'bundle-total-price';
+    price.textContent = fmt(bundleTotal);
+ 
+    card.appendChild(label);
+    card.appendChild(price);
+    totals.appendChild(card);
+  });
+}
+ 
+function clearAll() {
+  selected.clear();
+  document.querySelectorAll('.product-row,.other-row').forEach(r => r.classList.remove('selected'));
+  const ni = document.getElementById('other-name-input'), di = document.getElementById('other-desc-input');
+  if (ni) ni.value = ''; if (di) di.value = '';
+  clearSig('sig-customer','ph-customer'); clearSig('sig-associate','ph-associate');
+  bundles[0] = []; bundles[1] = []; bundles[2] = [];
+  saveBundles();
+  updateTotals();
+}
+ 
 function renderProducts() {
   const grid = document.getElementById('products-grid');
   products.forEach(p => {
     const row = document.createElement('div'); row.className = 'product-row';
+    row.draggable = true;
+    row.dataset.productId = p.id;
     row.innerHTML = `<div class="check-box"><div class="check-mark">&#10003;</div></div><div class="product-info"><div class="product-name">${p.name}</div><div class="product-desc">${p.desc}</div></div><div class="product-pricing"><div class="price-input-wrap"><span class="price-symbol">$</span><input class="price-input" type="number" id="price-${p.id}" value="${p.price}" min="0" step="1"></div><div class="price-note">+ 7.5% tax</div></div>`;
+    
+    row.ondragstart = (e) => {
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('itemId', p.id);
+      e.dataTransfer.setData('sourceBundleIdx', -1);
+      row.classList.add('dragging');
+    };
+    row.ondragend = () => row.classList.remove('dragging');
+ 
     row.addEventListener('click', e => { if (e.target.classList.contains('price-input')) return; selected.has(p.id)?selected.delete(p.id):selected.add(p.id); row.classList.toggle('selected',selected.has(p.id)); updateTotals(); });
     row.querySelector('.price-input').addEventListener('input', updateTotals);
     grid.appendChild(row);
   });
   const other = document.createElement('div'); other.className = 'other-row';
+  other.draggable = true;
+  other.dataset.productId = 'other';
   other.innerHTML = `<div class="check-box"><div class="check-mark">&#10003;</div></div><div class="product-info"><input class="other-name-input" id="other-name-input" type="text" placeholder="Add custom product name..."><input class="other-desc-input" id="other-desc-input" type="text" placeholder="Short description (optional)"></div><div class="product-pricing"><div class="price-input-wrap"><span class="price-symbol">$</span><input class="price-input" type="number" id="price-other" value="0" min="0" step="1"></div><div class="price-note">+ 7.5% tax</div></div>`;
+  
+  other.ondragstart = (e) => {
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('itemId', 'other');
+    e.dataTransfer.setData('sourceBundleIdx', -1);
+    other.classList.add('dragging');
+  };
+  other.ondragend = () => other.classList.remove('dragging');
+ 
   other.addEventListener('click', e => { if (['price-input','other-name-input','other-desc-input'].some(c=>e.target.classList.contains(c))) return; selected.has('other')?selected.delete('other'):selected.add('other'); other.classList.toggle('selected',selected.has('other')); updateTotals(); });
   other.querySelector('#price-other').addEventListener('input', updateTotals);
   other.querySelector('#other-name-input').addEventListener('input', updateTotals);
@@ -320,9 +560,10 @@ function clearSig(canvasId, placeholderId) {
 document.getElementById('f-date').valueAsDate = new Date();
 document.getElementById('term-select').addEventListener('change', updateTotals);
 document.getElementById('rate-input').addEventListener('input', updateTotals);
+ 
+loadBundles();
 renderProducts();
 updateTotals();
 window.addEventListener('load', () => { initSigPad('sig-customer','ph-customer'); initSigPad('sig-associate','ph-associate'); });
-</script>
-</body>
-</html>
+</script></document_content>
+</document>
