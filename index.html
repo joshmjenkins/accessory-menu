@@ -333,9 +333,22 @@ function renderBundles() {
     const col = document.createElement('div');
     col.className = 'bundle-column';
     col.id = 'bundle-' + bundleIdx;
-    col.ondragover = (e) => { e.preventDefault(); col.classList.add('drag-over'); };
+    col.ondragover = (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; col.classList.add('drag-over'); };
     col.ondragleave = () => col.classList.remove('drag-over');
-    col.ondrop = (e) => { e.preventDefault(); col.classList.remove('drag-over'); };
+    col.ondrop = (e) => { 
+      e.preventDefault();
+      col.classList.remove('drag-over');
+      const itemId = e.dataTransfer.getData('itemId');
+      const srcIdx = parseInt(e.dataTransfer.getData('sourceBundleIdx'));
+      if (srcIdx >= 0 && srcIdx !== bundleIdx) {
+        bundles[srcIdx] = bundles[srcIdx].filter(id => id !== itemId);
+      }
+      if (!bundles[bundleIdx].includes(itemId)) {
+        bundles[bundleIdx].push(itemId);
+      }
+      saveBundles();
+      updateTotals();
+    };
  
     const header = document.createElement('div');
     header.className = 'bundle-header';
@@ -420,14 +433,15 @@ function renderBundles() {
       const zone = document.createElement('div');
       zone.className = 'bundle-drop-zone';
       zone.textContent = 'Drag items here';
-      zone.ondragover = (e) => { e.preventDefault(); zone.classList.add('drag-active'); };
+      zone.ondragover = (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; zone.classList.add('drag-active'); };
       zone.ondragleave = () => zone.classList.remove('drag-active');
       zone.ondrop = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         zone.classList.remove('drag-active');
         const itemId = e.dataTransfer.getData('itemId');
         const srcIdx = parseInt(e.dataTransfer.getData('sourceBundleIdx'));
-        if (srcIdx !== bundleIdx) {
+        if (srcIdx >= 0 && srcIdx !== bundleIdx) {
           bundles[srcIdx] = bundles[srcIdx].filter(id => id !== itemId);
         }
         if (!bundles[bundleIdx].includes(itemId)) {
