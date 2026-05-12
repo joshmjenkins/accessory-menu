@@ -828,6 +828,260 @@
   }
   .btn.primary:hover::before { border-color: rgba(255,255,255,0.5); }
 
+  /* === Package builder enhancements === */
+  /* Quick-add tier pills on product rows */
+  .tier-pills {
+    display: flex;
+    gap: 4px;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+  .tier-pill {
+    font-family: var(--sans);
+    font-size: 8.5px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 5px 0;
+    min-width: 34px;
+    border: 1px solid var(--hair);
+    background: var(--paper-2);
+    color: var(--muted);
+    cursor: pointer;
+    border-radius: 0;
+    transition: all 0.2s ease;
+    text-align: center;
+  }
+  .tier-pill:hover {
+    border-color: var(--gold-deep);
+    color: var(--gold-deep);
+    background: var(--paper);
+  }
+  .tier-pill.active {
+    background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-deep) 100%);
+    border-color: var(--gold-deep);
+    color: #fff;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4) inset, 0 1px 2px rgba(60, 42, 18, 0.2);
+  }
+
+  /* Bundle column — recommended ribbon */
+  .bundle-column { padding: 1.6rem 1.2rem 1.25rem; }
+  .bundle-column.recommended {
+    border-color: var(--gold-deep);
+    background: linear-gradient(180deg, rgba(184, 148, 94, 0.09) 0%, transparent 35%);
+    box-shadow: 0 14px 36px -22px rgba(138, 106, 62, 0.4);
+  }
+  .bundle-column.recommended::after {
+    content: '★ Most Popular';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--ink);
+    color: var(--gold-light);
+    font-family: var(--sans);
+    font-size: 8.5px;
+    font-weight: 600;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border: 1px solid var(--gold-deep);
+    white-space: nowrap;
+    z-index: 2;
+  }
+
+  /* Tagline */
+  .bundle-tagline-input {
+    font-family: var(--display);
+    font-size: 13px;
+    font-style: italic;
+    color: var(--ink-soft);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    padding: 2px 0 4px;
+    width: 100%;
+    margin-bottom: 0.9rem;
+    font-weight: 400;
+  }
+  .bundle-tagline-input:focus { outline: none; border-bottom-color: var(--gold-pale); }
+  .bundle-tagline-input::placeholder { color: var(--muted); opacity: 0.55; font-style: italic; }
+
+  /* × remove */
+  .bundle-item { position: relative; padding-right: 28px; }
+  .bundle-item-remove {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 17px;
+    line-height: 1;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s, transform 0.15s;
+    padding: 0;
+  }
+  .bundle-item-remove:hover { color: var(--gold-deep); transform: translateY(-50%) scale(1.15); }
+
+  /* Controls row */
+  .bundle-controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 0.9rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .bundle-discount-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--sans);
+    font-size: 8.5px;
+    color: var(--muted);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .bundle-discount-input {
+    font-family: var(--display);
+    font-size: 15px;
+    font-weight: 500;
+    font-style: italic;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--hair);
+    width: 64px;
+    text-align: right;
+    color: var(--ink);
+    padding: 1px 0 2px;
+    font-variant-numeric: tabular-nums;
+  }
+  .bundle-discount-input::placeholder { color: var(--muted); opacity: 0.5; font-style: italic; }
+  .bundle-discount-input:focus { outline: none; border-bottom-color: var(--gold-deep); }
+  .bundle-recommend-toggle {
+    font-family: var(--sans);
+    font-size: 8.5px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-weight: 600;
+    transition: color 0.15s;
+  }
+  .bundle-recommend-toggle:hover { color: var(--gold-deep); }
+  .bundle-recommend-toggle.active { color: var(--gold-deep); }
+
+  /* Summary inside each bundle column */
+  .bundle-summary {
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--gold-pale);
+  }
+  .bundle-empty-note {
+    font-family: var(--display);
+    font-size: 13px;
+    font-style: italic;
+    color: var(--muted);
+    text-align: center;
+    padding: 0.5rem 0;
+    opacity: 0.7;
+  }
+  .bundle-sum-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--sans);
+    font-size: 9px;
+    color: var(--ink-soft);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 5px 0;
+    font-weight: 500;
+  }
+  .bundle-sum-row span:last-child {
+    font-family: var(--display);
+    font-size: 16px;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: 500;
+    font-style: italic;
+  }
+  .bundle-sum-row.discount { color: var(--gold-deep); }
+  .bundle-sum-row.discount span:last-child { color: var(--gold-deep); }
+  .bundle-sum-row.total {
+    border-top: 1px solid var(--gold);
+    margin-top: 6px;
+    padding-top: 10px;
+    font-weight: 700;
+    color: var(--gold-deep);
+    letter-spacing: 0.32em;
+  }
+  .bundle-sum-row.total span:last-child {
+    font-size: 24px;
+    color: var(--ink);
+  }
+  .bundle-monthly {
+    font-family: var(--display);
+    font-size: 19px;
+    font-style: italic;
+    font-weight: 500;
+    color: var(--gold-deep);
+    text-align: center;
+    padding-top: 12px;
+    margin-top: 10px;
+    border-top: 1px solid var(--hair);
+  }
+  .bundle-monthly small {
+    font-family: var(--sans);
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+    margin-top: 4px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  /* Bottom totals strip — recommended badge + savings */
+  .bundle-total-card { position: relative; }
+  .bundle-total-card.recommended {
+    background: linear-gradient(180deg, rgba(184, 148, 94, 0.1) 0%, transparent 100%);
+  }
+  .bundle-total-card.recommended::before {
+    content: '★';
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold);
+    font-size: 11px;
+  }
+  .bundle-total-savings {
+    font-family: var(--sans);
+    font-size: 8.5px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+    font-weight: 600;
+    margin-top: 8px;
+  }
+
   /* Responsive */
   @media (max-width: 640px) {
     body { padding: 2rem 1rem 3rem; }
@@ -996,19 +1250,75 @@ let isCash = false;
 // Bundle state
 const bundles = { 0: [], 1: [], 2: [] };
 const bundleNames = { 0: 'Essential', 1: 'Premium', 2: 'Deluxe' };
+const bundleMeta = {
+  0: { tagline: '', overridePrice: '', recommended: false },
+  1: { tagline: '', overridePrice: '', recommended: true },
+  2: { tagline: '', overridePrice: '', recommended: false }
+};
 
 // Load bundles and names from localStorage
 function loadBundles() {
   const saved = localStorage.getItem('accessory-bundles');
   const savedNames = localStorage.getItem('accessory-bundle-names');
+  const savedMeta = localStorage.getItem('accessory-bundle-meta');
   if (saved) Object.assign(bundles, JSON.parse(saved));
   if (savedNames) Object.assign(bundleNames, JSON.parse(savedNames));
+  if (savedMeta) {
+    const parsed = JSON.parse(savedMeta);
+    [0, 1, 2].forEach(i => { if (parsed[i]) Object.assign(bundleMeta[i], parsed[i]); });
+  }
 }
 
 // Save bundles to localStorage
 function saveBundles() {
   localStorage.setItem('accessory-bundles', JSON.stringify(bundles));
   localStorage.setItem('accessory-bundle-names', JSON.stringify(bundleNames));
+  localStorage.setItem('accessory-bundle-meta', JSON.stringify(bundleMeta));
+}
+
+function calcBundleSubtotal(idx) {
+  let sum = 0;
+  bundles[idx].forEach(id => { sum += getProductPrice(id); });
+  return sum;
+}
+function calcBundlePrice(idx) {
+  const subtotal = calcBundleSubtotal(idx);
+  const o = parseFloat(bundleMeta[idx].overridePrice);
+  if (!isNaN(o) && o >= 0 && bundleMeta[idx].overridePrice !== '') return o;
+  return subtotal;
+}
+function toggleBundleMembership(productId, bundleIdx) {
+  // ensure a product lives in only one bundle at a time
+  [0, 1, 2].forEach(i => {
+    if (i !== bundleIdx) bundles[i] = bundles[i].filter(id => id !== productId);
+  });
+  const pos = bundles[bundleIdx].indexOf(productId);
+  if (pos >= 0) bundles[bundleIdx].splice(pos, 1);
+  else bundles[bundleIdx].push(productId);
+  saveBundles();
+  updateTotals();
+}
+function renderProductPills() {
+  document.querySelectorAll('.tier-pills').forEach(container => {
+    const productId = container.dataset.productId;
+    container.innerHTML = '';
+    [0, 1, 2].forEach(idx => {
+      const pill = document.createElement('button');
+      pill.className = 'tier-pill';
+      pill.type = 'button';
+      const initials = (bundleNames[idx] || '').trim().slice(0, 3).toUpperCase() || (idx + 1).toString();
+      pill.textContent = initials;
+      pill.title = 'Add to ' + (bundleNames[idx] || ('Tier ' + (idx + 1)));
+      if (bundles[idx].includes(productId)) pill.classList.add('active');
+      pill.onclick = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        toggleBundleMembership(productId, idx);
+      };
+      pill.onmousedown = (e) => e.stopPropagation();
+      container.appendChild(pill);
+    });
+  });
 }
 
 function fmt(n) { return '$' + n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
@@ -1060,6 +1370,7 @@ function clearAll() {
   if (ni) ni.value = ''; if (di) di.value = '';
   clearSig('sig-customer','ph-customer'); clearSig('sig-associate','ph-associate');
   bundles[0] = []; bundles[1] = []; bundles[2] = [];
+  [0, 1, 2].forEach(i => { bundleMeta[i].tagline = ''; bundleMeta[i].overridePrice = ''; bundleMeta[i].recommended = (i === 1); });
   saveBundles();
   updateTotals();
 }
@@ -1074,36 +1385,41 @@ document.getElementById('cash-toggle').addEventListener('click', function() {
 function renderBundles() {
   const container = document.getElementById('bundle-container');
   const totals = document.getElementById('bundle-totals');
+  if (!container || !totals) return;
   container.innerHTML = '';
   totals.innerHTML = '';
 
+  const term = parseInt(document.getElementById('term-select').value);
+  const rate = parseFloat(document.getElementById('rate-input').value) || 0;
+
+  const dropOntoBundle = (bundleIdx, e) => {
+    const itemId = e.dataTransfer.getData('itemId');
+    if (!itemId) return;
+    const srcIdx = parseInt(e.dataTransfer.getData('sourceBundleIdx'));
+    [0, 1, 2].forEach(i => {
+      if (i !== bundleIdx) bundles[i] = bundles[i].filter(id => id !== itemId);
+    });
+    if (!bundles[bundleIdx].includes(itemId)) bundles[bundleIdx].push(itemId);
+    saveBundles();
+    updateTotals();
+  };
+
   [0, 1, 2].forEach(bundleIdx => {
+    const meta = bundleMeta[bundleIdx];
     const col = document.createElement('div');
-    col.className = 'bundle-column';
+    col.className = 'bundle-column' + (meta.recommended ? ' recommended' : '');
     col.id = 'bundle-' + bundleIdx;
     col.ondragover = (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; col.classList.add('drag-over'); };
     col.ondragleave = () => col.classList.remove('drag-over');
-    col.ondrop = (e) => {
-      e.preventDefault();
-      col.classList.remove('drag-over');
-      const itemId = e.dataTransfer.getData('itemId');
-      const srcIdx = parseInt(e.dataTransfer.getData('sourceBundleIdx'));
-      if (srcIdx >= 0 && srcIdx !== bundleIdx) {
-        bundles[srcIdx] = bundles[srcIdx].filter(id => id !== itemId);
-      }
-      if (!bundles[bundleIdx].includes(itemId)) {
-        bundles[bundleIdx].push(itemId);
-      }
-      saveBundles();
-      updateTotals();
-    };
+    col.ondrop = (e) => { e.preventDefault(); col.classList.remove('drag-over'); dropOntoBundle(bundleIdx, e); };
 
+    // Header
     const header = document.createElement('div');
     header.className = 'bundle-header';
-
     const tierName = document.createElement('div');
     tierName.className = 'bundle-tier-name';
     tierName.textContent = bundleNames[bundleIdx];
+    tierName.title = 'Click to rename';
     tierName.onclick = (e) => {
       e.stopPropagation();
       tierName.classList.add('editing');
@@ -1120,28 +1436,38 @@ function renderBundles() {
         input.replaceWith(tierName);
         tierName.textContent = bundleNames[bundleIdx];
         tierName.classList.remove('editing');
+        renderProductPills();
       };
       input.onblur = save;
-      input.onkeypress = (e) => { if (e.key === 'Enter') save(); };
+      input.onkeypress = (ev) => { if (ev.key === 'Enter') save(); };
     };
-
     const clearBtn = document.createElement('button');
     clearBtn.className = 'bundle-clear-btn';
     clearBtn.textContent = 'Clear';
     clearBtn.onclick = (e) => {
       e.stopPropagation();
       bundles[bundleIdx] = [];
+      bundleMeta[bundleIdx].overridePrice = '';
+      bundleMeta[bundleIdx].tagline = '';
       saveBundles();
       updateTotals();
     };
-
     header.appendChild(tierName);
     header.appendChild(clearBtn);
     col.appendChild(header);
 
+    // Tagline
+    const tagline = document.createElement('input');
+    tagline.type = 'text';
+    tagline.className = 'bundle-tagline-input';
+    tagline.value = meta.tagline || '';
+    tagline.placeholder = 'Add a tagline…';
+    tagline.oninput = () => { bundleMeta[bundleIdx].tagline = tagline.value; saveBundles(); };
+    col.appendChild(tagline);
+
+    // Items
     const items = document.createElement('div');
     items.className = 'bundle-items';
-
     bundles[bundleIdx].forEach(itemId => {
       const item = document.createElement('div');
       item.className = 'bundle-item';
@@ -1157,8 +1483,23 @@ function renderBundles() {
       price.className = 'bundle-item-price';
       price.textContent = fmt(getProductPrice(itemId));
 
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'bundle-item-remove';
+      removeBtn.innerHTML = '&times;';
+      removeBtn.title = 'Remove from package';
+      removeBtn.onclick = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        bundles[bundleIdx] = bundles[bundleIdx].filter(id => id !== itemId);
+        saveBundles();
+        updateTotals();
+      };
+      removeBtn.onmousedown = (e) => e.stopPropagation();
+
       item.appendChild(name);
       item.appendChild(price);
+      item.appendChild(removeBtn);
 
       item.ondragstart = (e) => {
         e.dataTransfer.effectAllowed = 'move';
@@ -1167,66 +1508,129 @@ function renderBundles() {
         item.classList.add('dragging');
       };
       item.ondragend = () => item.classList.remove('dragging');
-      item.ondblclick = (e) => {
-        e.stopPropagation();
-        bundles[bundleIdx] = bundles[bundleIdx].filter(id => id !== itemId);
-        saveBundles();
-        updateTotals();
-      };
-
       items.appendChild(item);
     });
 
     if (bundles[bundleIdx].length === 0) {
       const zone = document.createElement('div');
       zone.className = 'bundle-drop-zone';
-      zone.textContent = 'Drag items here';
+      zone.textContent = 'Tap a tier chip or drag here';
       zone.ondragover = (e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; zone.classList.add('drag-active'); };
       zone.ondragleave = () => zone.classList.remove('drag-active');
-      zone.ondrop = (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        zone.classList.remove('drag-active');
-        const itemId = e.dataTransfer.getData('itemId');
-        const srcIdx = parseInt(e.dataTransfer.getData('sourceBundleIdx'));
-        if (srcIdx >= 0 && srcIdx !== bundleIdx) {
-          bundles[srcIdx] = bundles[srcIdx].filter(id => id !== itemId);
-        }
-        if (!bundles[bundleIdx].includes(itemId)) {
-          bundles[bundleIdx].push(itemId);
-        }
-        saveBundles();
-        updateTotals();
-      };
+      zone.ondrop = (e) => { e.preventDefault(); e.stopPropagation(); zone.classList.remove('drag-active'); dropOntoBundle(bundleIdx, e); };
       items.appendChild(zone);
     }
-
     col.appendChild(items);
+
+    // Controls: override price + recommended toggle
+    const subtotal = calcBundleSubtotal(bundleIdx);
+    const finalPrice = calcBundlePrice(bundleIdx);
+    const savings = subtotal - finalPrice;
+
+    const controls = document.createElement('div');
+    controls.className = 'bundle-controls-row';
+    const priceLabel = document.createElement('label');
+    priceLabel.className = 'bundle-discount-wrap';
+    priceLabel.appendChild(document.createTextNode('Pkg price $'));
+    const priceInput = document.createElement('input');
+    priceInput.type = 'number';
+    priceInput.className = 'bundle-discount-input';
+    priceInput.min = '0';
+    priceInput.step = '1';
+    priceInput.value = meta.overridePrice;
+    priceInput.placeholder = subtotal > 0 ? Math.round(subtotal).toString() : '0';
+    priceInput.title = 'Override the package price (leave blank for items subtotal)';
+    priceInput.oninput = () => {
+      bundleMeta[bundleIdx].overridePrice = priceInput.value;
+      saveBundles();
+      updateTotals();
+    };
+    priceLabel.appendChild(priceInput);
+    controls.appendChild(priceLabel);
+
+    const recBtn = document.createElement('button');
+    recBtn.type = 'button';
+    recBtn.className = 'bundle-recommend-toggle' + (meta.recommended ? ' active' : '');
+    recBtn.textContent = meta.recommended ? '★ Most popular' : '☆ Mark popular';
+    recBtn.title = 'Highlight as the recommended tier';
+    recBtn.onclick = (e) => {
+      e.stopPropagation();
+      const wasRecommended = meta.recommended;
+      [0, 1, 2].forEach(i => { bundleMeta[i].recommended = false; });
+      if (!wasRecommended) bundleMeta[bundleIdx].recommended = true;
+      saveBundles();
+      updateTotals();
+    };
+    controls.appendChild(recBtn);
+    col.appendChild(controls);
+
+    // Summary
+    const summary = document.createElement('div');
+    summary.className = 'bundle-summary';
+    if (bundles[bundleIdx].length === 0) {
+      summary.innerHTML = '<div class="bundle-empty-note">Add items to see package pricing</div>';
+    } else {
+      const sub = document.createElement('div');
+      sub.className = 'bundle-sum-row';
+      sub.innerHTML = '<span>Items subtotal</span><span>' + fmt(subtotal) + '</span>';
+      summary.appendChild(sub);
+
+      if (savings > 0.005) {
+        const sav = document.createElement('div');
+        sav.className = 'bundle-sum-row discount';
+        sav.innerHTML = '<span>Package savings</span><span>− ' + fmt(savings) + '</span>';
+        summary.appendChild(sav);
+      }
+
+      const totalRow = document.createElement('div');
+      totalRow.className = 'bundle-sum-row total';
+      totalRow.innerHTML = '<span>Package price</span><span>' + fmt(finalPrice) + '</span>';
+      summary.appendChild(totalRow);
+
+      if (finalPrice > 0) {
+        const monthly = calcMonthly(finalPrice * (1 + TAX), term, rate);
+        const m = document.createElement('div');
+        m.className = 'bundle-monthly';
+        const mAmount = '+' + fmt(monthly).replace('.00', '') + '/mo';
+        m.innerHTML = mAmount + '<small>' + term + ' mo · ' + rate.toFixed(1) + '% · incl. tax</small>';
+        summary.appendChild(m);
+      }
+    }
+    col.appendChild(summary);
+
     container.appendChild(col);
   });
 
-  // Render totals
+  // Bottom totals strip
   [0, 1, 2].forEach(bundleIdx => {
     const card = document.createElement('div');
-    card.className = 'bundle-total-card';
+    card.className = 'bundle-total-card' + (bundleMeta[bundleIdx].recommended ? ' recommended' : '');
 
     const label = document.createElement('div');
     label.className = 'bundle-total-label';
     label.textContent = bundleNames[bundleIdx];
 
-    let bundleTotal = 0;
-    bundles[bundleIdx].forEach(itemId => {
-      bundleTotal += getProductPrice(itemId);
-    });
+    const subtotal = calcBundleSubtotal(bundleIdx);
+    const finalPrice = calcBundlePrice(bundleIdx);
+    const savings = subtotal - finalPrice;
 
     const price = document.createElement('div');
     price.className = 'bundle-total-price';
-    price.textContent = fmt(bundleTotal);
+    price.textContent = fmt(finalPrice);
 
     card.appendChild(label);
     card.appendChild(price);
+
+    if (savings > 0.005) {
+      const save = document.createElement('div');
+      save.className = 'bundle-total-savings';
+      save.textContent = 'save ' + fmt(savings).replace('.00', '');
+      card.appendChild(save);
+    }
     totals.appendChild(card);
   });
+
+  renderProductPills();
 }
 
 function clearAll() {
@@ -1236,6 +1640,7 @@ function clearAll() {
   if (ni) ni.value = ''; if (di) di.value = '';
   clearSig('sig-customer','ph-customer'); clearSig('sig-associate','ph-associate');
   bundles[0] = []; bundles[1] = []; bundles[2] = [];
+  [0, 1, 2].forEach(i => { bundleMeta[i].tagline = ''; bundleMeta[i].overridePrice = ''; bundleMeta[i].recommended = (i === 1); });
   saveBundles();
   updateTotals();
 }
@@ -1246,7 +1651,7 @@ function renderProducts() {
     const row = document.createElement('div'); row.className = 'product-row';
     row.draggable = true;
     row.dataset.productId = p.id;
-    row.innerHTML = `<div class="check-box"><div class="check-mark">&#10003;</div></div><div class="product-info"><div class="product-name">${p.name}</div><div class="product-desc">${p.desc}</div></div><div class="product-pricing"><div class="price-input-wrap"><span class="price-symbol">$</span><input class="price-input" type="number" id="price-${p.id}" value="${p.price}" min="0" step="1"></div><div class="price-note">+ 7.5% tax</div></div>`;
+    row.innerHTML = `<div class="check-box"><div class="check-mark">&#10003;</div></div><div class="product-info"><div class="product-name">${p.name}</div><div class="product-desc">${p.desc}</div></div><div class="product-pricing"><div class="price-input-wrap"><span class="price-symbol">$</span><input class="price-input" type="number" id="price-${p.id}" value="${p.price}" min="0" step="1"></div><div class="price-note">+ 7.5% tax</div><div class="tier-pills" data-product-id="${p.id}"></div></div>`;
 
     row.ondragstart = (e) => {
       e.dataTransfer.effectAllowed = 'move';
@@ -1263,7 +1668,7 @@ function renderProducts() {
   const other = document.createElement('div'); other.className = 'other-row';
   other.draggable = true;
   other.dataset.productId = 'other';
-  other.innerHTML = `<div class="check-box"><div class="check-mark">&#10003;</div></div><div class="product-info"><input class="other-name-input" id="other-name-input" type="text" placeholder="Add custom product name..."><input class="other-desc-input" id="other-desc-input" type="text" placeholder="Short description (optional)"></div><div class="product-pricing"><div class="price-input-wrap"><span class="price-symbol">$</span><input class="price-input" type="number" id="price-other" value="0" min="0" step="1"></div><div class="price-note">+ 7.5% tax</div></div>`;
+  other.innerHTML = `<div class="check-box"><div class="check-mark">&#10003;</div></div><div class="product-info"><input class="other-name-input" id="other-name-input" type="text" placeholder="Add custom product name..."><input class="other-desc-input" id="other-desc-input" type="text" placeholder="Short description (optional)"></div><div class="product-pricing"><div class="price-input-wrap"><span class="price-symbol">$</span><input class="price-input" type="number" id="price-other" value="0" min="0" step="1"></div><div class="price-note">+ 7.5% tax</div><div class="tier-pills" data-product-id="other"></div></div>`;
 
   other.ondragstart = (e) => {
     e.dataTransfer.effectAllowed = 'move';
