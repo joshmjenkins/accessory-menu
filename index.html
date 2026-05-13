@@ -1288,10 +1288,7 @@ function calcBundlePrice(idx) {
   return subtotal;
 }
 function toggleBundleMembership(productId, bundleIdx) {
-  // ensure a product lives in only one bundle at a time
-  [0, 1, 2].forEach(i => {
-    if (i !== bundleIdx) bundles[i] = bundles[i].filter(id => id !== productId);
-  });
+  // independent per tier — same item can live in any combination of packages
   const pos = bundles[bundleIdx].indexOf(productId);
   if (pos >= 0) bundles[bundleIdx].splice(pos, 1);
   else bundles[bundleIdx].push(productId);
@@ -1395,10 +1392,7 @@ function renderBundles() {
   const dropOntoBundle = (bundleIdx, e) => {
     const itemId = e.dataTransfer.getData('itemId');
     if (!itemId) return;
-    const srcIdx = parseInt(e.dataTransfer.getData('sourceBundleIdx'));
-    [0, 1, 2].forEach(i => {
-      if (i !== bundleIdx) bundles[i] = bundles[i].filter(id => id !== itemId);
-    });
+    // independent per tier — drop adds to this package without removing it from any other
     if (!bundles[bundleIdx].includes(itemId)) bundles[bundleIdx].push(itemId);
     saveBundles();
     updateTotals();
